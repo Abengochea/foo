@@ -5,7 +5,7 @@ module.exports = {
     database: 'tfg_db',
     dialect: 'mysql',
     username: 'admin_tfg',
-    password: '22uagknpizz',
+    password: '123456',
     port: 3306
   },
   production: {
