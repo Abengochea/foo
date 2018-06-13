@@ -1,8 +1,73 @@
 <template>
+	<div class="column is-12">
+	<div class="columns">
+	<div class="column is-6">
 
-	<div class='col-sm-6 col-sm-offset-3'>
-		<h1>List of Users</h1>
+<div class="card events-card">
+	  <header class="card-header">
+                                <p class="card-header-title">
+                                    Usuarios
+                                </p>
+                                <a href="#" class="card-header-icon" aria-label="more options">
+                  <span class="icon">
+                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </a>
+</header>
+<div class="card-table">
+                                <div class="content">
+                                    <table class="table is-fullwidth is-striped is-hoverable">
+										<thead>
+											<tr>
+												<th>#</td>
+												<th>Nombre</td>
+												<th>Apellido</td>
+												<th>Telefono</td>
+											</tr>
+										</thead>
+                                        <tbody>
+                                            <tr v-for="user in users">
+												<!--
+                                                <td width="5%"><i class="fa fa-bell-o"></i></td>
+											-->
+                                                <td>{{user.id}}</td>
+                                                <td>{{user.first_name}}</td>
+                                                <td>{{user.last_name}}</td>
+                                                <td>{{user.phone}}</td>
+                                                <td><a class="button is-small is-primary" v-on:click="selectUser('user.id','true')">Seleccionar</a></td>
+                                                <td><a class="button is-small is-primary" v-on:click="selectUser('user.id','false')">Datos</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <footer class="card-footer">
+                                <a href="#" class="card-footer-item">Mostrar todos</a>
+                            </footer>
+                        </div>
+</div>
+		<!--
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Nom</th>
+					<th scope="col">Cognom</th>
+					<th scope="col">Telefon</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="user in users">
+					<td>{{user.id}}</td>
+					<td>{{user.first_name}}</td>
+					<td>{{user.last_name}}</td>
+					<td>{{user.phone}}</td>
+				</tr>
+			</tbody>
+		</table>
+	-->
 
+<!--
 		<ul>
 			<li v-for='user in users'>
 				<h3>{{user.first_name}}</h3>
@@ -11,9 +76,91 @@
 				<p>{{user.phone}}</p>
 			</li>
 		</ul>
-	</div>
+	-->
 
+	<div class="column is-6">
+
+<div v-show="ok" class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      Configuracion
+    </p>
+  </header>
+  <div class="card-content">
+	  <div class="control">
+  <input class="input" type="text" v-bind:placeholder="users[0].first_name" disabled>
+</div>
+<br>
+    <div class="content">
+		<div class="columns">
+		<div class="column is-4">
+		<a class="button is-success is-fullwidth">Joc 1</a>
+	</div>
+		<div class="column is-4">
+		<a class="button is-warning is-fullwidth">Joc 2</a>
+	</div>
+		<div class="column is-4">
+		<a class="button is-danger is-fullwidth">Joc 3</a>
+	</div>
+</div>
+    </div>
+  </div>
+  <footer class="card-footer">
+    <a href="#" class="card-footer-item">Enviar</a>
+  </footer>
+</div>
+
+
+
+
+
+
+<div v-show="!ok" class="card events-card">
+	  <header class="card-header">
+                                <p class="card-header-title">
+                                    Historial de Partides
+                                </p>
+                                <a href="#" class="card-header-icon" aria-label="more options">
+                  <span class="icon">
+                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </a>
+</header>
+<div class="card-table">
+                                <div class="content">
+                                    <table class="table is-fullwidth is-striped is-hoverable">
+										<thead>
+											<tr>
+												<th>#</td>
+												<th>Juego</td>
+												<th>Dificultad</td>
+												<th>Resultado</td>
+											</tr>
+										</thead>
+                                        <tbody>
+                                            <tr v-for="game in users[0].Games">
+                                                <td>{{game.id}}</td>
+                                                <td>{{game.game}}</td>
+                                                <td>{{game.difficulty}}</td>
+                                                <td>{{game.result}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <footer class="card-footer">
+                                <a href="#" class="card-footer-item">Mostrar todos</a>
+                            </footer>
+                        </div>
+
+
+</div>
+
+
+
+</div>
 	<pre>{{users | json}}</pre>
+</div>
 </template>
 
 <script>
@@ -27,7 +174,8 @@ export default {
 	data(){
 		return {
 			users: {},
-			admins: []
+			admins: [],
+			ok: true
 		}
 	},
 	ready(){
@@ -42,6 +190,9 @@ export default {
 		getUsers(){
 			this.$http.get('/api/users')
 				.then(res => this.users = res.body)
+		},
+		selectUser(id, bool){
+			this.ok = bool
 		}
 	}
 }
