@@ -23,7 +23,7 @@ router.map({
 	'/admins': {
 		component: Admins
 	},
-	'/author/:id': {
+	'/admin/:id': {
 		component: Admin
 	},
 	'/users': {

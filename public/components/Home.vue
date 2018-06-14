@@ -1,7 +1,7 @@
 
 <template>
 	<div class='jumbotron'>
-		<h1>Sequelize database</h1>
+		<h1>Prototipo v1.0.0</h1>
 
 	</div>
 </template>

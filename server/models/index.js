@@ -13,7 +13,7 @@ if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
   // url, username, password, config object
-  var sequelize = new Sequelize(config.url, 'admin_tfg', '22uagknpizz', config);
+  var sequelize = new Sequelize(config.url, 'admin_tfg', '123456', config);
 }
 
 //Load all the models
