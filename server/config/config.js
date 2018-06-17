@@ -1,11 +1,11 @@
 module.exports = {
   development: {
     url: 'tfg_db', // database name
-//    url: process.env.DATABASE_URL,
+ // url: process.env.DATABASE_URL,
     database: 'tfg_db',
     dialect: 'mysql',
     username: 'admin_tfg',
-    password: '123456',
+    password: '22uagknpizz',
     port: 3306
   },
   production: {

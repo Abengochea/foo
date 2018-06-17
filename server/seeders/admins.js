@@ -6,6 +6,6 @@ module.exports = [
         "name": "Wea",
         "username": "Miteel",
         "password": "22uagknpizz",
-        "Users": [1,2]
+        "Users": [1,2,3]
     }
 }];

@@ -8,10 +8,46 @@ const express = require('express'),
 	admins = require('./server/controllers/admins'),
 	users = require('./server/controllers/users');
 	games = require('./server/controllers/games');
+	arduino = require('./server/controllers/arduino');
+
+
+
+
+
+//=============================
+//Arduino communication
+//=============================
+
+const SerialPort = require('serialport')
+const Readline = SerialPort.parsers.Readline;
+const mySerial = new SerialPort('/dev/cu.usbmodem21')
+const parser = mySerial.pipe(new Readline({ delimiter: '\r\n' }))
+//parser.on('data', console.log)
+parser.on('data', function(data){
+	console.log(data.split(";"))
+	fdata = data.split(";")
+	//Per tal de afegir un joc a la db
+	Game = require('./server/models/').Game;
+	Game.create({ game: fdata[0], difficulty: fdata[1], result: fdata[2], fuser_id: parseInt(data[3]) }).then(task => {
+  // you can now access the newly created task via the variable task
+})
+
+})
+
+mySerial.on('open', function () {
+  console.log('Opened Port.');
+
+});
+
+mySerial.on('err', function (data) {
+  console.log(err.message);
+});
+
+//=============================
 
 // express config
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride());
 app.use(cookieParser());
 app.set('port', process.env.PORT || 8000);
@@ -36,6 +72,17 @@ router.get('/games', games.index);
 router.get('/games/:id', games.show);
 router.post('/games', games.create);
 router.delete('/games', games.delete);
+
+//define serialport comunicatio
+//router.get('/arduino' arduino.send);
+router.get('/arduino', arduino.wea);
+router.post('/arduino', function(req, res){
+  // mySerial.on('open', function () {
+	   mySerial.write(req.body)
+  console.log('Opened Port.');
+
+//})
+});
 
 // register api routes
 app.use('/api', router);

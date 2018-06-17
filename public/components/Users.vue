@@ -26,7 +26,7 @@
 											</tr>
 										</thead>
                                         <tbody>
-                                            <tr v-for="(user, index) in users">
+                                            <tr v-for="user in users">
 												<!--
                                                 <td width="5%"><i class="fa fa-bell-o"></i></td>
 											-->
@@ -34,8 +34,8 @@
                                                 <td>{{user.first_name}}</td>
                                                 <td>{{user.last_name}}</td>
                                                 <td>{{user.phone}}</td>
-                                                <td><a class="button is-small is-primary" v-on:click="selectUser(index,true)">Seleccionar</a></td>
-                                                <td><a class="button is-small is-primary" v-on:click="selectUser(index,false)">Datos</a></td>
+                                                <td><a class="button is-small is-primary" v-on:click="selectUser(user.id,true)">Seleccionar</a></td>
+                                                <td><a class="button is-small is-primary" v-on:click="selectUser(user.id,false)">Datos</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -106,6 +106,18 @@
     </div>
   </div>
   <footer class="card-footer">
+	  <!-- prova de arduino envian data-->
+	  <form method="post" action="/api/arduino">
+		  <input type="test" name="game" value="joc">
+		   <input type="test" name="diff" value="diff">
+		   <input type="test" name="result" value="resultat">
+		   <input type="test" name="user_id" value="2">
+		   <input type="submit">
+	   </form>
+
+
+
+
     <a href="#" class="card-footer-item">Enviar</a>
   </footer>
 </div>
@@ -117,44 +129,44 @@
 
 <div v-show="!ok" class="card events-card">
 	  <header class="card-header">
-                                <p class="card-header-title">
-                                    Historial de Partides
-                                </p>
-                                <a href="#" class="card-header-icon" aria-label="more options">
-                  <span class="icon">
-                    <i class="fa fa-angle-down" aria-hidden="true"></i>
-                  </span>
-                </a>
-</header>
-<div class="card-table">
-                                <div class="content">
-                                    <table class="table is-fullwidth is-striped is-hoverable">
-										<thead>
-											<tr>
-												<th>#</th>
-												<th>Juego</th>
-												<th>Dificultad</th>
-												<th>Resultado</th>
-											</tr>
-										</thead>
-                                        <tbody>
-                                            <tr v-for="game in users[selection].Games">
-                                                <td>{{game.id}}</td>
-                                                <td>{{game.game}}</td>
-                                                <td>{{game.difficulty}}</td>
-                                                <td>{{game.result}}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <footer class="card-footer">
-                                <a href="#" class="card-footer-item">Mostrar todos</a>
-                            </footer>
-                        </div>
+		  <p class="card-header-title">
+			  Historial de Partides
+		  </p>
+		  <a href="#" class="card-header-icon" aria-label="more options">
+			  <span class="icon">
+				  <i class="fa fa-angle-down" aria-hidden="true"></i>
+			  </span>
+		  </a>
+	  </header>
+	  <div class="card-table">
+		  <div class="content">
+			  <table class="table is-fullwidth is-striped is-hoverable">
+				  <thead>
+					  <tr>
+						  <th>#</th>
+						  <th>Juego</th>
+						  <th>Dificultad</th>
+						  <th>Resultado</th>
+					  </tr>
+				  </thead>
+				  <tbody>
+					  <tr v-for="game in users[selection].Games">
+						  <td>{{game.id}}</td>
+						  <td>{{game.game}}</td>
+						  <td>{{game.difficulty}}</td>
+						  <td>{{game.result}}</td>
+					  </tr>
+				  </tbody>
+			  </table>
+		  </div>
+	  </div>
+	  <footer class="card-footer">
+		  <a href="#" class="card-footer-item">Mostrar todos</a>
+	  </footer>
+	</div>
 
 
-</div>
+	</div>
 
 
 
@@ -173,7 +185,7 @@ export default {
 	},
 	data(){
 		return {
-			users: {},
+			users: [],
 			admins: [],
 			ok: true,
             selection: 0
@@ -194,8 +206,8 @@ export default {
 				//.then(res => this.users = res.body)
 		},
 		selectUser(index, bool){
-			this.$set(this.ok = bool)
-            this.$set(this.selection = index)
+			this.$set('ok', bool)
+            this.$set('selection',index-1)
 		}
 	}
 }
