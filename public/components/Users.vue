@@ -34,8 +34,8 @@
                                                 <td>{{user.first_name}}</td>
                                                 <td>{{user.last_name}}</td>
                                                 <td>{{user.phone}}</td>
-                                                <td><a class="button is-small is-primary" v-on:click="selectUser(user.id,true)">Seleccionar</a></td>
-                                                <td><a class="button is-small is-primary" v-on:click="selectUser(user.id,false)">Datos</a></td>
+                                                <td><a class="button is-small is-primary" v-on:click="selectUser(user,true)">Seleccionar</a></td>
+                                                <td><a class="button is-small is-primary" v-on:click="selectUser(user,false)">Datos</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -88,37 +88,67 @@
   </header>
   <div class="card-content">
 	  <div class="control">
-  <input class="input" type="text" v-bind:placeholder="users[selection].first_name" disabled>
+  <label class="label" type="text">{{selection.first_name}} {{selection.last_name}}</label>
 </div>
 <br>
     <div class="content">
 		<div class="columns">
 		<div class="column is-4">
-		<a class="button is-success is-fullwidth">Joc 1</a>
+		<a class="button is-success is-fullwidth" v-on:click="selectJoc(1)">Joc 1</a>
 	</div>
 		<div class="column is-4">
-		<a class="button is-warning is-fullwidth">Joc 2</a>
+		<a class="button is-warning is-fullwidth" v-on:click="selectJoc(2)" >Joc 2</a>
 	</div>
 		<div class="column is-4">
-		<a class="button is-danger is-fullwidth">Joc 3</a>
+		<a class="button is-danger is-fullwidth" v-on:click="selectJoc(3)" >Joc 3</a>
 	</div>
 </div>
     </div>
-  </div>
-  <footer class="card-footer">
 	  <!-- prova de arduino envian data-->
 	  <form method="post" action="/api/arduino">
-		  <input type="test" name="game" value="joc">
-		   <input type="test" name="diff" value="diff">
-		   <input type="test" name="result" value="resultat">
-		   <input type="test" name="user_id" value="2">
+		  <!--
+		  <input class="input" type="test" name="game" value="joc">
+		   <input class="input" type="test" name="diff" value="diff">
+		   <input class="input" type="test" name="result" value="resultat">
+		   <input class="input" type="test" name="user_id" value="2">
 		   <input type="submit">
+	   -->
+
+		   <div class="field is-grouped">
+  <p class="label is-small">Usuario/Jugador</p>
+  <p class="control">
+    <input class="input is-small" type="test" v-bind:value="selection.id" readonly>
+</p>
+</div>
+
+		   <div class="field is-grouped">
+  <p class="label is-small">Juego</p>
+  <p class="control">
+    <input class="input is-small" type="test" v-bind:value="joc" readonly>
+</p>
+</div>
+<div>
+	<vue-slider v-ref:slider :value.sync="diff"></vue-slider>
+  </div>
+
+		   <div class="field is-grouped">
+  <p class="label is-small">Dificultad</p>
+  <p class="control">
+    <input class="input is-small" type="test" v-bind:value="diff" readonly>
+</p>
+</div>
+
+
+
+  <div class="control">
+    <button class="button is-primary" type="submit">
+      Enviar
+    </button>
+</div>
+</div>
 	   </form>
 
-
-
-
-    <a href="#" class="card-footer-item">Enviar</a>
+  <footer class="card-footer">
   </footer>
 </div>
 
@@ -150,7 +180,7 @@
 					  </tr>
 				  </thead>
 				  <tbody>
-					  <tr v-for="game in users[selection].Games">
+					  <tr v-for="game in selection.Games">
 						  <td>{{game.id}}</td>
 						  <td>{{game.game}}</td>
 						  <td>{{game.difficulty}}</td>
@@ -176,11 +206,11 @@
 </template>
 
 <script>
-
-
+import vueSlider from './vue-slider.vue';
 export default {
 	name: 'user',
 	components: {
+		vueSlider
 
 	},
 	data(){
@@ -188,7 +218,9 @@ export default {
 			users: [],
 			admins: [],
 			ok: true,
-            selection: 0
+            selection: 0,
+			joc: 1,
+			diff: 0
 		}
 	},
 	ready(){
@@ -205,9 +237,12 @@ export default {
                 .then(users => this.$set('users', users.body))
 				//.then(res => this.users = res.body)
 		},
-		selectUser(index, bool){
+		selectUser(user, bool){
 			this.$set('ok', bool)
-            this.$set('selection',index-1)
+            this.$set('selection',user)
+		},
+		selectJoc(joc){
+			this.$set('joc', joc)
 		}
 	}
 }

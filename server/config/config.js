@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     url: 'tfg_db', // database name
- // url: process.env.DATABASE_URL,
+//  url: process.env.DATABASE_URL,
     database: 'tfg_db',
     dialect: 'mysql',
     username: 'admin_tfg',
