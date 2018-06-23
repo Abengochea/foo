@@ -5,9 +5,9 @@ var path = require('path');
 var models = require('../models/');
 
 sequelize_fixtures.loadFiles([
-	'./server/seeders/admins.js',
-	'./server/seeders/users.js',
-	'./server/seeders/games.js'
+	'/home/pi/foo/server/seeders/admins.js',
+	'/home/pi/foo/server/seeders/users.js',
+	'/home/pi/foo/server/seeders/games.js'
 ], models).then(function(){
 	console.log('Seed data loaded!');
 });

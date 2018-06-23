@@ -94,13 +94,13 @@
     <div class="content">
 		<div class="columns">
 		<div class="column is-4">
-		<a class="button is-success is-fullwidth" v-on:click="selectJoc(1)">Joc 1</a>
+		<a class="button is-success is-fullwidth" v-on:click="selectJoc(0)">Juego 0</a>
 	</div>
 		<div class="column is-4">
-		<a class="button is-warning is-fullwidth" v-on:click="selectJoc(2)" >Joc 2</a>
+		<a class="button is-warning is-fullwidth" v-on:click="selectJoc(1)" >Juego 1</a>
 	</div>
 		<div class="column is-4">
-		<a class="button is-danger is-fullwidth" v-on:click="selectJoc(3)" >Joc 3</a>
+		<a class="button is-danger is-fullwidth" v-on:click="selectJoc(2)" >Juego 2</a>
 	</div>
 </div>
     </div>
@@ -117,14 +117,14 @@
 		   <div class="field is-grouped">
   <p class="label is-small">Usuario/Jugador</p>
   <p class="control">
-    <input class="input is-small" type="test" v-bind:value="selection.id" readonly>
+    <input class="input is-small" type="test" name="user_id" v-bind:value="selection.id" readonly>
 </p>
 </div>
 
 		   <div class="field is-grouped">
   <p class="label is-small">Juego</p>
   <p class="control">
-    <input class="input is-small" type="test" v-bind:value="joc" readonly>
+    <input class="input is-small" type="test" name="game" v-bind:value="joc" readonly>
 </p>
 </div>
 <div>
@@ -134,7 +134,7 @@
 		   <div class="field is-grouped">
   <p class="label is-small">Dificultad</p>
   <p class="control">
-    <input class="input is-small" type="test" v-bind:value="diff" readonly>
+    <input class="input is-small" type="test" name="diff" v-bind:value="diff">
 </p>
 </div>
 
@@ -177,6 +177,7 @@
 						  <th>Juego</th>
 						  <th>Dificultad</th>
 						  <th>Resultado</th>
+						  <th>Fecha</th>
 					  </tr>
 				  </thead>
 				  <tbody>
@@ -185,6 +186,7 @@
 						  <td>{{game.game}}</td>
 						  <td>{{game.difficulty}}</td>
 						  <td>{{game.result}}</td>
+						  <td>{{game.created_at}}</td>
 					  </tr>
 				  </tbody>
 			  </table>
@@ -219,7 +221,7 @@ export default {
 			admins: [],
 			ok: true,
             selection: 0,
-			joc: 1,
+			joc: 0,
 			diff: 0
 		}
 	},

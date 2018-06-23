@@ -2,9 +2,9 @@ module.exports = [
     {
         "model": "Game",
         "data": {
-            "game": "joc1",
+            "game": "juego1",
             "difficulty": "2",
-            "result": 600000001,
+            "result": 7,
             "user_id": 1,
         }
     },
@@ -12,18 +12,18 @@ module.exports = [
     {
         "model": "Game",
         "data": {
-            "game": "joc2",
+            "game": "juego2",
             "difficulty": "3",
-            "result": 600000002,
+            "result": 5,
             "user_id": 2,
         }
     },
     {
         "model": "Game",
         "data": {
-            "game": "joc3",
+            "game": "juego3",
             "difficulty": "4",
-            "result": 600000003,
+            "result": 10,
             "user_id": 3,
         }
     }

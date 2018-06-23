@@ -20,7 +20,7 @@ const express = require('express'),
 
 const SerialPort = require('serialport')
 const Readline = SerialPort.parsers.Readline;
-const mySerial = new SerialPort('/dev/cu.usbmodemFD121')
+const mySerial = new SerialPort('/dev/ttyACM0')
 const parser = mySerial.pipe(new Readline({ delimiter: '\r\n' }))
 //parser.on('data', console.log)
 parser.on('data', function(data){
@@ -29,7 +29,7 @@ parser.on('data', function(data){
 	//Per tal de afegir un joc a la db
 	Game = require('./server/models/').Game;
 	//console.log(parseInt(fdata[3]);
-	Game.create({ game: fdata[0], difficulty: fdata[1], result: fdata[2], user_id: parseInt(fdata[3]) }).then(task => {
+	Game.create({ game: 'Juego'+fdata[0], difficulty: fdata[1], result: fdata[2], user_id: parseInt(fdata[3]) }).then(task => {
   // you can now access the newly created task via the variable task
 })
 
@@ -79,7 +79,7 @@ router.delete('/games', games.delete);
 router.get('/arduino', arduino.wea);
 router.post('/arduino', function(req, res){
   // mySerial.on('open', function () {
-	   mySerial.write(req.body.game+';'+req.body.diff+';'+req.body.result+';'+req.body.user_id)
+	   mySerial.write(req.body.game+';'+req.body.diff+';'+req.body.user_id+';')
   console.log('Opened Port.');
 
 //})

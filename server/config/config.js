@@ -4,7 +4,7 @@ module.exports = {
 //  url: process.env.DATABASE_URL,
     database: 'tfg_db',
     dialect: 'mysql',
-    username: 'admin_tfg',
+    username: 'root',
     password: '22uagknpizz',
     port: 3306
   },

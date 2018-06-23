@@ -2,8 +2,8 @@ module.exports = [
     {
         "model": "User",
         "data": {
-            "first_name": "Bubu",
-            "last_name": "Bubuwuena",
+            "first_name": "Nombre1",
+            "last_name": "Apellido1",
             "phone": 600000000,
             "admin_id": 1,
             "Games": [1,2]
@@ -13,8 +13,8 @@ module.exports = [
     {
         "model": "User",
         "data": {
-            "first_name": "Miteel",
-            "last_name": "Miteeela",
+            "first_name": "Nombre2",
+            "last_name": "Apellido2",
             "phone": 600000002,
             "admin_id": 1,
             "Games": [4]
@@ -30,8 +30,8 @@ module.exports = [
     {
         "model": "User",
         "data": {
-            "first_name": "Oolele",
-            "last_name": "Oolelele",
+            "first_name": "Nombre3",
+            "last_name": "Apellido3",
             "phone": 600000001,
             "admin_id": 1,
             "Games": [3]

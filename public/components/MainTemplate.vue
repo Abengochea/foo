@@ -40,9 +40,11 @@
                     <a class="navbar-item" v-link="{ path: '/'}">
             Home
           </a>
+<!--
                     <a class="navbar-item" v-link="{ path: '/admins'}">
             Admins
           </a>
+-->
                     <a class="navbar-item" v-link="{ path: '/users'}">
             Usuarios
           </a>

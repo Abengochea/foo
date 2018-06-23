@@ -18,6 +18,7 @@
     "mysql": "^2.11.1",
     "mysql2": "^1.0.0-rc.11",
     "sequelize": "^3.24.1",
+    "sequelize-cli": "^4.0.0",
     "sequelize-fixtures": "^0.5.4",
     "serialport": "^6.2.0",
     "vue": "^1.0.26",
