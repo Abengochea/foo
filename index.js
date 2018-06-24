@@ -29,7 +29,16 @@ parser.on('data', function(data){
 	//Per tal de afegir un joc a la db
 	Game = require('./server/models/').Game;
 	//console.log(parseInt(fdata[3]);
-	Game.create({ game: 'Juego'+fdata[0], difficulty: fdata[1], result: fdata[2], user_id: parseInt(fdata[3]) }).then(task => {
+	if (fdata[0] == '0'){
+		gdata = 'Velocidad'
+	} else if(fdata[0] == '1'){
+		gdata = 'Memoria'
+	}else if(fdata[0] == '2'){
+		gdata = 'Piano'
+	}else{
+		gdata = fdata[0]
+	}
+	Game.create({ game: gdata, difficulty: fdata[1], result: (parseFloat(fdata[2])/(parseFloat(fdata[2])+parseFloat(fdata[4]))), user_id: parseInt(fdata[3]) }).then(task => {
   // you can now access the newly created task via the variable task
 })
 
@@ -79,7 +88,7 @@ router.delete('/games', games.delete);
 router.get('/arduino', arduino.wea);
 router.post('/arduino', function(req, res){
   // mySerial.on('open', function () {
-	   mySerial.write(req.body.game+';'+req.body.diff+';'+req.body.user_id+';')
+	   mySerial.write(req.body.game+';'+req.body.diff+';'+req.body.user_id+';'+req.body.neo+';'+req.body.tout+';')
   console.log('Opened Port.');
 
 //})

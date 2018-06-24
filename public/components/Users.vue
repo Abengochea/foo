@@ -8,11 +8,13 @@
                                 <p class="card-header-title">
                                     Usuarios
                                 </p>
+<!--
                                 <a href="#" class="card-header-icon" aria-label="more options">
                   <span class="icon">
                     <i class="fa fa-angle-down" aria-hidden="true"></i>
                   </span>
                 </a>
+-->
 </header>
 <div class="card-table">
                                 <div class="content">
@@ -22,7 +24,9 @@
 												<th>#</th>
 												<th>Nombre</th>
 												<th>Apellido</th>
-												<th>Telefono</th>
+												<th></th>
+												<th></th>
+												<th></th>
 											</tr>
 										</thead>
                                         <tbody>
@@ -33,50 +37,23 @@
                                                 <td>{{user.id}}</td>
                                                 <td>{{user.first_name}}</td>
                                                 <td>{{user.last_name}}</td>
-                                                <td>{{user.phone}}</td>
                                                 <td><a class="button is-small is-primary" v-on:click="selectUser(user,true)">Seleccionar</a></td>
                                                 <td><a class="button is-small is-primary" v-on:click="selectUser(user,false)">Datos</a></td>
+                                                <td><a class="button is-small is-danger" v-on:click="selectUser(user,false)">Eliminar</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <footer class="card-footer">
-                                <a href="#" class="card-footer-item">Mostrar todos</a>
+<!--                                <a href="#" class="card-footer-item">Mostrar todos</a>
+-->
+<a class="card-footer-item button is-success is-small is-centered">Alta Usuario</a>
                             </footer>
                         </div>
 </div>
-		<!--
-		<table class="table">
-			<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Nom</th>
-					<th scope="col">Cognom</th>
-					<th scope="col">Telefon</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr v-for="user in users">
-					<td>{{user.id}}</td>
-					<td>{{user.first_name}}</td>
-					<td>{{user.last_name}}</td>
-					<td>{{user.phone}}</td>
-				</tr>
-			</tbody>
-		</table>
-	-->
+	
 
-<!--
-		<ul>
-			<li v-for='user in users'>
-				<h3>{{user.first_name}}</h3>
-				<p>by {{user.admin_id | adminIdToName admins}}</p>
-
-				<p>{{user.phone}}</p>
-			</li>
-		</ul>
-	-->
 
 	<div class="column is-6">
 
@@ -94,13 +71,13 @@
     <div class="content">
 		<div class="columns">
 		<div class="column is-4">
-		<a class="button is-success is-fullwidth" v-on:click="selectJoc(0)">Juego 0</a>
+		<a class="button is-success is-fullwidth" v-on:click="selectJoc(0)">Velocidad</a>
 	</div>
 		<div class="column is-4">
-		<a class="button is-warning is-fullwidth" v-on:click="selectJoc(1)" >Juego 1</a>
+		<a class="button is-warning is-fullwidth" v-on:click="selectJoc(1)" >Memoria</a>
 	</div>
 		<div class="column is-4">
-		<a class="button is-danger is-fullwidth" v-on:click="selectJoc(2)" >Juego 2</a>
+		<a class="button is-danger is-fullwidth" v-on:click="selectJoc(2)" >Piano</a>
 	</div>
 </div>
     </div>
@@ -127,9 +104,11 @@
     <input class="input is-small" type="test" name="game" v-bind:value="joc" readonly>
 </p>
 </div>
+
 <div>
 	<vue-slider v-ref:slider :value.sync="diff"></vue-slider>
   </div>
+
 
 		   <div class="field is-grouped">
   <p class="label is-small">Dificultad</p>
@@ -137,6 +116,29 @@
     <input class="input is-small" type="test" name="diff" v-bind:value="diff">
 </p>
 </div>
+
+<div>
+	<vue1-slider v-ref:slider :value.sync="neo"></vue1-slider>
+  </div>
+
+		   <div class="field is-grouped">
+  <p class="label is-small">Numero de elementos</p>
+  <p class="control">
+    <input class="input is-small" type="test" name="neo" v-bind:value="neo">
+</p>
+</div>
+
+<div>
+	<vue2-slider v-ref:slider :value.sync="tout"></vue2-slider>
+  </div>
+
+		   <div class="field is-grouped">
+  <p class="label is-small">TimeOut</p>
+  <p class="control">
+    <input class="input is-small" type="test" name="tout" v-bind:value="tout">
+</p>
+</div>
+
 
 
 
@@ -203,16 +205,19 @@
 
 
 </div>
-	<pre>{{users | json}}</pre>
 </div>
 </template>
 
 <script>
 import vueSlider from './vue-slider.vue';
+import vue1Slider from './vue1-slider.vue';
+import vue2Slider from './vue2-slider.vue';
 export default {
 	name: 'user',
 	components: {
-		vueSlider
+		vueSlider,
+		vue1Slider,
+		vue2Slider
 
 	},
 	data(){
@@ -220,9 +225,11 @@ export default {
 			users: [],
 			admins: [],
 			ok: true,
-            selection: 0,
+	                selection: 0,
 			joc: 0,
-			diff: 0
+			diff: 0,
+			neo: 3,
+			tout: 10
 		}
 	},
 	ready(){

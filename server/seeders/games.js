@@ -2,7 +2,7 @@ module.exports = [
     {
         "model": "Game",
         "data": {
-            "game": "juego1",
+            "game": "Velocidad",
             "difficulty": "2",
             "result": 7,
             "user_id": 1,
@@ -12,7 +12,7 @@ module.exports = [
     {
         "model": "Game",
         "data": {
-            "game": "juego2",
+            "game": "Memoria",
             "difficulty": "3",
             "result": 5,
             "user_id": 2,
@@ -21,7 +21,7 @@ module.exports = [
     {
         "model": "Game",
         "data": {
-            "game": "juego3",
+            "game": "Piano",
             "difficulty": "4",
             "result": 10,
             "user_id": 3,

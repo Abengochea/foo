@@ -14,9 +14,6 @@ module.exports = {
       last_name: {
         type: Sequelize.STRING
       },
-      phone: {
-        type: Sequelize.INTEGER
-      },
       admin_id: {
         type: Sequelize.INTEGER
       },
